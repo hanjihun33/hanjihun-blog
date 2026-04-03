@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: hanjihun-blog-api
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  site:
+    title: Hanjihun Blog
+    subtitle: React와 Spring으로 구축하는 개인 개발 아카이브
+    description: 학습 노트, 프로젝트 기록, 기술 실험을 정리하기 위한 개인 블로그의 출발점입니다.
+    categories:
+      - devlog
+      - notes
+      - projects
+

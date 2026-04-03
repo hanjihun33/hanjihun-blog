@@ -1,0 +1,63 @@
+.tagWrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: auto;
+  max-width: 15%;
+  height: auto;
+  justify-content: end;
+  align-content: end;
+  text-align: end;
+  padding: 10em 3em 0 0;
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .tagWrapper {
+    display: grid;
+  }
+}
+
+.idxWrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  max-width: 20%;
+  height: auto;
+  justify-content: start;
+  align-content: start;
+  text-align: start;
+  padding: 10em 0 0 3em;
+}
+
+@media (min-width: 768px) {
+  .idxWrapper {
+    display: grid;
+  }
+}
+
+.idxTap1 {
+  margin: 0;
+}
+
+.idxTap2 {
+  margin-left: 1em;
+}
+
+.idxTap3 {
+  margin-left: 2em;
+}
+
+.idx {
+  transition: all 0.3s linear;
+}
+
+.idx:hover {
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.3s linear;
+  text-decoration: underline;
+}

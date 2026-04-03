@@ -1,0 +1,36 @@
+#!/bin/sh
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+MAVEN_VERSION="${MVNW_VERSION:-3.9.6}"
+MAVEN_DIST="apache-maven-${MAVEN_VERSION}"
+MAVEN_HOME_DIR="${SCRIPT_DIR}/.mvn/${MAVEN_DIST}"
+MAVEN_BIN="${MAVEN_HOME_DIR}/bin/mvn"
+ARCHIVE_PATH="${SCRIPT_DIR}/.mvn/${MAVEN_DIST}-bin.tar.gz"
+ARCHIVE_URL="https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_DIST}-bin.tar.gz"
+
+if [ -x "${MAVEN_BIN}" ]; then
+  exec "${MAVEN_BIN}" "$@"
+fi
+
+if command -v mvn >/dev/null 2>&1; then
+  exec mvn "$@"
+fi
+
+mkdir -p "${SCRIPT_DIR}/.mvn"
+
+if command -v curl >/dev/null 2>&1; then
+  echo "Downloading Maven ${MAVEN_VERSION}..."
+  curl -fsSL "${ARCHIVE_URL}" -o "${ARCHIVE_PATH}"
+elif command -v wget >/dev/null 2>&1; then
+  echo "Downloading Maven ${MAVEN_VERSION}..."
+  wget -q "${ARCHIVE_URL}" -O "${ARCHIVE_PATH}"
+else
+  echo "Error: curl or wget is required to download Maven." >&2
+  exit 1
+fi
+
+tar -xzf "${ARCHIVE_PATH}" -C "${SCRIPT_DIR}/.mvn"
+
+exec "${MAVEN_BIN}" "$@"
+

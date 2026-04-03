@@ -1,0 +1,188 @@
+.section {
+  padding: 1.75rem 1.5rem;
+  width: 100%;
+}
+
+.list {
+  display: list-item;
+  margin-top: 1rem;
+}
+
+.list li {
+  margin-left: 1.75rem;
+  margin-top: 0.65rem;
+  list-style-type: square;
+  font-weight: 400;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  min-height: 100vh;
+  height: fit-content;
+}
+
+.subWrapper {
+  width: 100%;
+  max-width: 55rem;
+  margin-top: 5%;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.predicate {
+  width: 100%;
+}
+
+.sideBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.link {
+  color: var(--color-primary-600);
+  transition: text-decoration-color 0.3s ease, color 0.3s ease;
+  text-decoration: underline transparent;
+}
+
+.link:hover {
+  text-decoration-color: var(--color-primary-400);
+  color: var(--color-primary-400);
+  cursor: pointer;
+}
+
+.indexing {
+  z-index: 3;
+}
+
+.chipBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.introduce {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 3.5rem;
+  line-height: 1.85;
+  color: var(--color-surface-700);
+}
+
+.label {
+  display: block;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.portfolioList {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.portfolioItem {
+  display: flex;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.portfolioContent {
+  width: 100%;
+}
+
+.timelineRail {
+  position: relative;
+  width: 1rem;
+  flex: 0 0 1rem;
+}
+
+.timelineDot {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-top: 0.55rem;
+  border-radius: 999px;
+  background: var(--color-primary-500);
+  box-shadow: 0 0 0 4px white;
+}
+
+.timelineLine {
+  position: absolute;
+  left: calc(0.95rem / 2 - 1px);
+  top: 1.9rem;
+  bottom: -2rem;
+  width: 2px;
+  background: var(--color-surface-200);
+}
+
+.portfolioText {
+  color: var(--color-surface-700);
+  line-height: 1.85;
+}
+
+.projectList {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.projectList li {
+  margin-top: 0.6rem;
+  line-height: 1.7;
+  color: var(--color-surface-700);
+}
+
+.contactList {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.75rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contactList dt {
+  font-weight: 600;
+  color: var(--color-surface-600);
+}
+
+.contactList dd {
+  color: var(--color-surface-800);
+}
+
+@media (min-width: 768px) {
+  .mainWrapper {
+    padding: 4rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .block {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .predicate {
+    width: 75%;
+  }
+
+  .sideBlock {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

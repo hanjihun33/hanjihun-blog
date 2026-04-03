@@ -1,0 +1,13 @@
+.animationWrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.animationWrapper > * {
+  pointer-events: auto;
+}

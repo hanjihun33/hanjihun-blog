@@ -1,0 +1,21 @@
+.mainWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 3.5rem);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contentWrapper {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.indexing {
+  z-index: 3;
+  position: relative;
+}

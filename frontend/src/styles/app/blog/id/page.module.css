@@ -1,0 +1,113 @@
+.blogWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  min-height: 100vh;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .blogWrapper {
+    padding: 3rem 2rem;
+  }
+}
+
+.dateWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  color: #a3a3a3;
+}
+
+.thumbnail {
+  border-radius: 1rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .thumbnail {
+    width: 60%;
+  }
+}
+
+.progressBarWrapper .progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-primary-500);
+  transform-origin: 0;
+  z-index: 999;
+}
+
+.titleText {
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: 1.75rem;
+  display: block;
+  margin-top: 2rem;
+  color: #171717;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .titleText {
+    font-size: 2.5rem;
+  }
+}
+
+.postWrapper {
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 50em;
+}
+
+.postWrapper ul,
+.postWrapper ol {
+  display: block;
+  list-style: disc outside none;
+  margin: 1em 0 5px 20px;
+  padding: 0;
+}
+
+.postWrapper ol {
+  list-style-type: decimal;
+}
+
+.postWrapper li {
+  display: list-item;
+}
+
+.postWrapper ul ul,
+.postWrapper ol ul {
+  list-style-type: circle;
+  margin-left: 15px;
+}
+
+.postWrapper ol ol,
+.postWrapper ul ol {
+  list-style-type: lower-latin;
+  margin-left: 15px;
+}
+
+.postWrapper ul ul ul,
+.postWrapper ul ol ul,
+.postWrapper ol ul ul,
+.postWrapper ol ol ul {
+  list-style-type: square;
+  margin-left: 30px;
+}
+
+.postWrapper ol ol ol,
+.postWrapper ol ul ol,
+.postWrapper ul ol ol,
+.postWrapper ul ul ol {
+  list-style-type: lower-roman;
+  margin-left: 30px;
+}
