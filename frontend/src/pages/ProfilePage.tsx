@@ -1,65 +1,81 @@
-import { FiGithub, FiGlobe, FiLinkedin, FiMail, FiPhone, FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { Chip, Typography } from '../components/tailwind/client-components';
 import ProgressBar from '../components/motion/progress-bar';
-import { PROFILE_IMAGE_URL } from '../data/profile';
+import { portfolioProjects } from '../data/portfolio-projects';
 import styles from '../styles/app/introduce/profile/page.module.css';
 
-const focusAreas = ['Java', 'Spring Boot', 'React', 'TypeScript', 'API Design', 'Writing'];
+const assetBase = `${import.meta.env.BASE_URL}portfolio-assets`;
 
-const portfolioProjects = [
+const educationItems = [
   {
-    title: 'Hanjihun Blog',
-    period: '2026.04 - 진행 중',
-    description:
-      'React, Vite, Spring Boot 기반으로 구성 중인 개인 블로그 겸 포트폴리오 사이트입니다. 학습한 내용을 정리하고 직접 배포 가능한 형태로 만드는 것을 목표로 하고 있습니다.',
-    whatIDid: [
-      'Vite 기반 React 공개 블로그 화면 구성',
-      'Spring Boot API 초안과 게시글 조회 구조 구성',
-      '프로필, 외부 링크, 공통 이미지 자원 관리 정리',
-    ],
-    stack: ['React', 'TypeScript', 'Vite', 'Spring Boot', 'Java 17'],
-    links: [
-      {
-        label: 'GitHub',
-        href: 'https://github.com/hanjihun33',
-      },
-    ],
+    period: '2025.07 - 2026.06',
+    title: '삼성 청년 SW 아카데미',
+    description: 'SSAFY 14기, 웹/모바일\n프로젝트 중심 교육',
   },
   {
-    title: 'Study Notes Archive',
-    period: '2025.11 - 2026.02',
-    description:
-      '개인 학습 노트와 정리 문서를 카테고리별로 관리할 수 있도록 구성한 기록용 웹 프로젝트입니다. 주제를 나누어 정리하고 다시 찾아보기 쉽게 만드는 데 초점을 두었습니다.',
-    whatIDid: [
-      '카테고리별 문서 탐색 화면과 상세 조회 화면 구성',
-      '주제별 태그와 검색 흐름을 고려한 화면 구조 설계',
-      '학습 기록을 프로젝트 단위로 묶을 수 있는 콘텐츠 정리 방식 실험',
-    ],
-    stack: ['React', 'TypeScript', 'CSS Modules'],
-    links: [
-      {
-        label: 'GitHub',
-        href: 'https://github.com/hanjihun33',
-      },
-    ],
+    period: '2019.03 - 2025.02',
+    title: '조선대학교',
+    description: '수학과 / 컴퓨터공학과 복수전공',
+  },
+];
+
+const certificationItems = [
+  { period: '2026.09', title: '정보처리기사' },
+  { period: '2026.06', title: 'SQL 개발자(SQLD)' },
+  { period: '2026.04', title: 'TOEIC SPEAKING', description: 'IM2' },
+];
+
+const projectSummaryItems = [
+  {
+    period: '2026.04 - 2026.05',
+    title: 'Wedge',
+    description: '브라우저 실행 기반\nUX 전환 리스크 진단 서비스',
   },
   {
-    title: 'Task Flow Dashboard',
-    period: '2025.08 - 2025.10',
-    description:
-      '할 일과 진행 상태를 한 화면에서 관리할 수 있도록 만든 간단한 대시보드 프로젝트입니다. 작은 기능이라도 끝까지 구현하고 배포 흐름까지 연결하는 연습을 목표로 진행했습니다.',
-    whatIDid: [
-      '상태별 작업 목록과 상세 정보 패널 UI 구현',
-      '반응형 레이아웃과 간단한 필터링 인터랙션 추가',
-      '프로젝트 구조를 작게 유지하면서 재사용 가능한 컴포넌트 분리 연습',
-    ],
-    stack: ['React', 'Vite', 'TypeScript'],
-    links: [
-      {
-        label: 'GitHub',
-        href: 'https://github.com/hanjihun33',
-      },
-    ],
+    period: '2026.02 - 2026.04',
+    title: 'DonDone',
+    description: '외국인 근로자 블록체인 지갑\n급여·송금·증빙 통합 서비스',
+  },
+  {
+    period: '2026.01 - 2026.02',
+    title: '당낭콩',
+    description: '실시간 혈당 데이터 기반\nAI 혈당 관리 서비스',
+  },
+  {
+    period: '2025.11 - 2025.12',
+    title: 'MyTripQuest',
+    description: 'GPS·AI 인증 기반\n게이미피케이션 여행 서비스',
+  },
+];
+
+const skillItems = [
+  {
+    name: 'Java',
+    percent: '80%',
+    icon: 'java.svg',
+    level: 4,
+    note: '재사용성과 계층 분리를 고려해\n백엔드 코드를 작성합니다.',
+  },
+  {
+    name: 'Spring Boot',
+    percent: '80%',
+    icon: 'spring.svg',
+    level: 4,
+    note: 'REST API, 인증, 스케줄러,\n도메인 흐름을 구현했습니다.',
+  },
+  {
+    name: 'MySQL',
+    percent: '80%',
+    icon: 'mysql.svg',
+    level: 4,
+    note: '관계 모델링과 조회 목적에 맞는\n쿼리 작성을 경험했습니다.',
+  },
+  {
+    name: 'Redis',
+    percent: '70%',
+    icon: 'redis.svg',
+    level: 3,
+    note: '캐시와 버퍼를 활용해 외부 API\n수집과 상태 관리를 분리했습니다.',
   },
 ];
 
@@ -68,61 +84,105 @@ export default function ProfilePage() {
     <div className={styles.mainWrapper}>
       <ProgressBar />
       <div className={`${styles.subWrapper} ${styles.indexing}`}>
-        <div className={styles.section}>
-          <Typography className="text-4xl md:text-5xl" variant="h1">
-            반갑습니다, 저는 한지훈입니다.
-          </Typography>
-          <ul className={styles.list}>
-            <li>
-              <Typography className="leading-relaxed" variant="h4">
-                사용자에게 보이는 화면부터 API 구조까지 연결해서 생각하는 개발자를 지향합니다.
-              </Typography>
-            </li>
-            <li>
-              <Typography className="leading-relaxed" variant="h4">
-                기능 구현에 그치지 않고, 읽기 쉬운 코드와 확장 가능한 구조를 만드는 데 관심이 있습니다.
-              </Typography>
-            </li>
-          </ul>
-        </div>
+        <section className={styles.coverPage} aria-label="포트폴리오 소개 및 요약 페이지">
+          <div className={styles.topBar} aria-hidden="true" />
 
-        <hr className="my-8 border-slate-100" />
+          <section className={styles.coverIntro} aria-label="자기소개와 연락처">
+            <h1 className={styles.coverGreeting}>
+              안녕하세요,<strong>차지훈입니다.</strong>
+            </h1>
+            <div className={styles.coverSlash} aria-hidden="true">
+              /
+            </div>
+            <p className={styles.coverIntroText}>
+              하나의 정답만을 고집하지 않는 열린 태도로
+              <br />
+              <span>이슈를 효율적이고 다각적으로 고민하는 지원자</span>입니다.
+            </p>
+            <img
+              alt="차지훈 프로필 사진"
+              className={styles.coverProfile}
+              src={`${assetBase}/profile-chajihun-smile.png`}
+            />
 
-        <div className={styles.section}>
-          <Typography variant="h2">Introduce.</Typography>
-          <div className={styles.introduce}>
-            <span>
-              Java, Spring Boot와 React, TypeScript를 중심으로 웹 서비스를 직접 설계하고 구현하며, 프론트엔드와
-              백엔드의 흐름을 함께 이해하는 개발자로 성장하고 있습니다.
-            </span>
-            <span>
-              화면 구현, API 설계, 프로젝트 구조화, GitHub 관리, 배포까지 개발 전 과정을 직접 경험하면서 실무에
-              빠르게 적응할 수 있는 기본기를 쌓고 있습니다.
-            </span>
-          </div>
+            <h2 className={styles.coverContactTitle}>contact.</h2>
+            <dl className={styles.coverContacts}>
+              <dt>GitHub.</dt>
+              <dd>github.com/hanjihun33</dd>
+              <dt>Blog.</dt>
+              <dd>hanjihun33.github.io/hanjihun-blog</dd>
+              <dt>Email.</dt>
+              <dd>jhcha3270@gmail.com</dd>
+            </dl>
+          </section>
 
-          <div className={styles.predicate}>
-            <Typography variant="h2">Focus.</Typography>
-            <Typography className={styles.label} variant="lead">
-              What I can contribute
-            </Typography>
-            <ul className={styles.list}>
-              <li>요구사항을 화면과 API 단위로 나누어 구조화하고 구현하는 일</li>
-              <li>Spring Boot 기반 API를 단순하고 명확한 책임으로 설계하는 일</li>
-              <li>React와 TypeScript로 읽기 쉬운 UI를 구성하고 유지보수성을 높이는 일</li>
-              <li>GitHub와 배포까지 연결해 실제 동작하는 결과물을 만드는 일</li>
-            </ul>
+          <div className={`${styles.coverDivider} ${styles.coverDividerLeft}`} aria-hidden="true" />
+          <div className={`${styles.coverDivider} ${styles.coverDividerRight}`} aria-hidden="true" />
 
-            <Typography className={styles.label} variant="lead">
-              Stack
-            </Typography>
-            <div className={styles.chipBox}>
-              {focusAreas.map((area) => (
-                <Chip key={area} size="sm" value={area} variant="outlined" />
+          <section className={styles.coverInfo} aria-label="교육, 자격증, 프로젝트 요약">
+            <h2 className={styles.coverSectionTitle}>education.</h2>
+            <dl className={styles.coverInfoList}>
+              {educationItems.map((item) => (
+                <div className={styles.coverInfoRow} key={`${item.period}-${item.title}`}>
+                  <dt>{item.period}</dt>
+                  <dd>
+                    <strong>{item.title}</strong>
+                    <span>{item.description}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <h2 className={`${styles.coverSectionTitle} ${styles.coverCertTitle}`}>certification.</h2>
+            <dl className={styles.coverCertList}>
+              {certificationItems.map((item) => (
+                <div className={styles.coverCertRow} key={`${item.period}-${item.title}`}>
+                  <dt>{item.period}</dt>
+                  <dd>
+                    <strong>{item.title}</strong>
+                    {item.description ? <span>{item.description}</span> : null}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <h2 className={`${styles.coverSectionTitle} ${styles.coverProjectTitle}`}>project summary.</h2>
+            <dl className={styles.coverProjectList}>
+              {projectSummaryItems.map((item) => (
+                <div className={styles.coverProjectRow} key={item.title}>
+                  <dt>{item.period}</dt>
+                  <dd>
+                    <strong>{item.title}</strong>
+                    <span>{item.description}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section className={styles.coverSkills} aria-label="핵심 기술 역량">
+            <h2 className={styles.coverSkillsTitle}>skills.</h2>
+            <div className={styles.skillVisualGrid}>
+              {skillItems.map((item) => (
+                <article className={styles.skillVisualCard} key={item.name}>
+                  <img alt={`${item.name} 로고`} className={styles.skillIcon} src={`${assetBase}/skills/${item.icon}`} />
+                  <div>
+                    <div className={styles.skillHead}>
+                      <strong className={styles.skillName}>{item.name}</strong>
+                      <span className={styles.skillPercent}>{item.percent}</span>
+                    </div>
+                    <div className={styles.skillMeter} aria-hidden="true">
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <span className={index < item.level ? styles.skillOn : undefined} key={index} />
+                      ))}
+                    </div>
+                    <p className={styles.skillNote}>{item.note}</p>
+                  </div>
+                </article>
               ))}
             </div>
-          </div>
-        </div>
+          </section>
+        </section>
 
         <hr className="my-8 border-slate-100" />
 
@@ -136,7 +196,15 @@ export default function ProfilePage() {
                   <span className={styles.timelineLine} />
                 </div>
                 <div className={styles.portfolioContent}>
-                  <Typography variant="h4">{project.title}</Typography>
+                  <Typography variant="h4">
+                    <Link
+                      aria-label={`${project.title} 프로젝트 상세 보기`}
+                      className={styles.projectTitleLink}
+                      to={`/introduce/profile/projects/${project.slug}`}
+                    >
+                      {project.title}
+                    </Link>
+                  </Typography>
 
                   <Typography className={styles.label} variant="lead">
                     Period
@@ -146,7 +214,7 @@ export default function ProfilePage() {
                   <Typography className={styles.label} variant="lead">
                     Description
                   </Typography>
-                  <p className={styles.portfolioText}>{project.description}</p>
+                  <p className={styles.portfolioText}>{project.shortDescription}</p>
 
                   <Typography className={styles.label} variant="lead">
                     What I did
@@ -158,19 +226,6 @@ export default function ProfilePage() {
                   </ul>
 
                   <Typography className={styles.label} variant="lead">
-                    Link
-                  </Typography>
-                  <ul className={styles.projectList}>
-                    {project.links.map((link) => (
-                      <li key={link.href}>
-                        <a className={styles.link} href={link.href} rel="noreferrer" target="_blank">
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Typography className={styles.label} variant="lead">
                     Stack
                   </Typography>
                   <div className={styles.chipBox}>
@@ -178,69 +233,14 @@ export default function ProfilePage() {
                       <Chip key={item} size="sm" value={item} variant="outlined" />
                     ))}
                   </div>
+
+                  <Link className={styles.projectDetailLink} to={`/introduce/profile/projects/${project.slug}`}>
+                    프로젝트 자세히 보기
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        <hr className="my-8 border-slate-100" />
-
-        <div className={styles.section}>
-          <Typography variant="h2">Contact.</Typography>
-          <div className="flex flex-col md:flex-row gap-8 items-center mt-4">
-            <img
-              alt="profile"
-              className="rounded-full object-cover object-center shadow-lg shadow-surface-200 w-44 h-44 md:w-56 md:h-56 ring-4 ring-surface-100"
-              src={PROFILE_IMAGE_URL}
-            />
-            <div className="flex flex-col gap-2 w-full">
-              <dl className={styles.contactList}>
-                <dt>
-                  <FiUser className="inline mr-2" />
-                  Name
-                </dt>
-                <dd>차지훈</dd>
-                <dt>
-                  <FiMail className="inline mr-2" />
-                  Email
-                </dt>
-                <dd>jhcha3270@gmail.com</dd>
-                <dt>
-                  <FiPhone className="inline mr-2" />
-                  Phone
-                </dt>
-                <dd>010-5034-3270</dd>
-                <dt>
-                  <FiGithub className="inline mr-2" />
-                  GitHub
-                </dt>
-                <dd>
-                  <a className={styles.link} href="https://github.com/hanjihun33" rel="noreferrer" target="_blank">
-                    hanjihun33
-                  </a>
-                </dd>
-                <dt>
-                  <FiLinkedin className="inline mr-2" />
-                  LinkedIn
-                </dt>
-                <dd>
-                  <a
-                    className={styles.link}
-                    href="https://www.linkedin.com/in/hanjihun-linkdin/"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    hanjihun-linkdin
-                  </a>
-                </dd>
-                <dt>
-                  <FiGlobe className="inline mr-2" />
-                  Blog
-                </dt>
-                <dd>hanjihun blog</dd>
-              </dl>
-            </div>
           </div>
         </div>
       </div>

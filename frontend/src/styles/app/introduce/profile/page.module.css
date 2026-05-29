@@ -1,3 +1,325 @@
+
+.coverPage {
+  --cover-ink: var(--color-surface-900);
+  --cover-soft-ink: var(--color-surface-700);
+  --cover-muted: var(--color-surface-500);
+  --cover-accent: var(--color-primary-600);
+  --cover-blue: var(--color-primary-500);
+  --cover-line: var(--color-surface-200);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2rem;
+  min-height: 40.5rem;
+  padding: 4.15rem 3.25rem 2.6rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, #fff 34%, #fff 100%);
+  color: var(--cover-ink);
+  border: 1px solid var(--color-surface-100);
+  border-radius: 1.5rem;
+  box-shadow: 0 1.25rem 3.5rem rgb(23 23 23 / 0.06);
+}
+
+.topBar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1.125rem;
+  background: linear-gradient(90deg, var(--color-primary-600), var(--color-primary-400));
+}
+
+.coverIntro,
+.coverInfo,
+.coverSkills {
+  position: relative;
+  z-index: 1;
+}
+
+.coverGreeting {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.2vw, 1.75rem);
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+}
+
+.coverGreeting strong {
+  display: inline;
+  margin-left: 0.7rem;
+  font-weight: 800;
+}
+
+.coverSlash {
+  margin: 0.875rem 0 1.125rem;
+  color: var(--cover-accent);
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.coverIntroText {
+  margin: 0;
+  color: var(--cover-ink);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  font-weight: 800;
+  letter-spacing: -0.09em;
+  word-break: keep-all;
+}
+
+.coverIntroText span {
+  color: var(--cover-accent);
+}
+
+.coverProfile {
+  display: block;
+  width: 11.55rem;
+  height: 14.7rem;
+  margin: 1.125rem auto 0;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--color-primary-100);
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgb(70 136 60 / 0.12);
+}
+
+.coverContactTitle {
+  margin: 0.875rem 0 0.625rem;
+  color: var(--cover-ink);
+  font-size: 1.125rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.coverContacts {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  row-gap: 0.45rem;
+  margin: 0;
+  color: var(--cover-soft-ink);
+  font-size: 0.79rem;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.coverContacts dt {
+  margin: 0;
+  color: var(--cover-ink);
+  font-weight: 800;
+}
+
+.coverContacts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.coverDivider {
+  position: absolute;
+  top: 3.125rem;
+  bottom: 2.625rem;
+  border-left: 1.5px solid var(--cover-line);
+}
+
+.coverDividerLeft {
+  left: 34.7%;
+}
+
+.coverDividerRight {
+  left: 66.85%;
+}
+
+.coverSectionTitle,
+.coverSkillsTitle {
+  margin: 0;
+  color: var(--cover-ink);
+  font-size: clamp(1.65rem, 2.4vw, 2.1rem);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.coverInfoList,
+.coverCertList,
+.coverProjectList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+}
+
+.coverInfoList {
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.coverInfoRow,
+.coverCertRow,
+.coverProjectRow {
+  display: grid;
+  grid-template-columns: 8.1rem 1fr;
+  column-gap: 0.75rem;
+  color: var(--cover-soft-ink);
+  font-size: 0.78rem;
+  line-height: 1.32;
+  letter-spacing: -0.05em;
+}
+
+.coverInfoRow dt,
+.coverCertRow dt,
+.coverProjectRow dt {
+  margin: 0;
+  color: var(--cover-ink);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.coverInfoRow dd,
+.coverCertRow dd,
+.coverProjectRow dd {
+  margin: 0;
+}
+
+.coverInfoRow strong,
+.coverCertRow strong,
+.coverProjectRow strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--cover-ink);
+  font-weight: 900;
+}
+
+.coverInfoRow strong {
+  font-size: 0.86rem;
+}
+
+.coverInfoRow span,
+.coverCertRow span,
+.coverProjectRow span {
+  display: block;
+  color: var(--cover-muted);
+  font-weight: 500;
+  white-space: pre-line;
+}
+
+.coverCertTitle {
+  margin-top: 1.25rem;
+}
+
+.coverCertList {
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.coverCertRow {
+  grid-template-columns: 5.75rem 1fr;
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+.coverCertRow strong {
+  font-size: 0.8rem;
+}
+
+.coverProjectTitle {
+  margin-top: 1.375rem;
+}
+
+.coverProjectList {
+  gap: 0.38rem;
+  margin-top: 0.875rem;
+  padding-left: 1.125rem;
+  border-left: 2px solid var(--cover-ink);
+}
+
+.coverProjectRow {
+  grid-template-columns: 7.25rem 1fr;
+  font-size: 0.72rem;
+  line-height: 1.24;
+}
+
+.coverProjectRow strong {
+  font-size: 0.79rem;
+  line-height: 1;
+}
+
+.coverSkillsTitle {
+  margin-top: 1.625rem;
+}
+
+.skillVisualGrid {
+  display: grid;
+  gap: 1.05rem;
+  margin-top: 1.75rem;
+}
+
+.skillVisualCard {
+  display: grid;
+  grid-template-columns: 3.65rem 1fr;
+  column-gap: 1.125rem;
+  align-items: start;
+}
+
+.skillIcon {
+  display: block;
+  justify-self: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 13px rgb(17 24 39 / 0.1));
+}
+
+.skillHead {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.32rem;
+}
+
+.skillName {
+  color: var(--cover-ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+.skillPercent {
+  color: var(--color-surface-400);
+  font-size: 0.84rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.skillMeter {
+  display: flex;
+  gap: 0.31rem;
+  margin-bottom: 0.44rem;
+}
+
+.skillMeter span {
+  width: 1.31rem;
+  height: 1.31rem;
+  border-radius: 0.32rem;
+  background: var(--color-surface-200);
+}
+
+.skillMeter .skillOn {
+  background: var(--color-primary-300);
+}
+
+.skillNote {
+  margin: 0;
+  color: var(--color-surface-500);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
 .section {
   padding: 1.75rem 1.5rem;
   width: 100%;
@@ -27,7 +349,7 @@
 
 .subWrapper {
   width: 100%;
-  max-width: 55rem;
+  max-width: 72rem;
   margin-top: 5%;
 }
 
@@ -97,6 +419,18 @@
   display: flex;
   gap: 1.25rem;
   align-items: stretch;
+  padding: 1.25rem;
+  border: 1px solid var(--color-surface-100);
+  border-radius: 1.25rem;
+  background: white;
+  box-shadow: 0 0.75rem 2rem rgb(15 23 42 / 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.portfolioItem:hover {
+  border-color: var(--color-primary-200);
+  box-shadow: 0 1rem 2.5rem rgb(15 23 42 / 0.08);
+  transform: translateY(-2px);
 }
 
 .portfolioContent {
@@ -130,6 +464,55 @@
   background: var(--color-surface-200);
 }
 
+
+.projectTitleLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-surface-900);
+  text-decoration: underline transparent;
+  text-underline-offset: 0.25rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.projectTitleLink::after {
+  content: '→';
+  color: var(--color-primary-500);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.projectTitleLink:hover {
+  color: var(--color-primary-600);
+  text-decoration-color: var(--color-primary-300);
+}
+
+.projectTitleLink:hover::after {
+  transform: translateX(0.2rem);
+}
+
+.projectDetailLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--color-primary-600);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 0.6rem 1.4rem rgb(37 99 235 / 0.18);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.projectDetailLink:hover {
+  background: var(--color-primary-500);
+  box-shadow: 0 0.8rem 1.8rem rgb(37 99 235 / 0.24);
+  transform: translateY(-1px);
+}
+
 .portfolioText {
   color: var(--color-surface-700);
   line-height: 1.85;
@@ -161,6 +544,47 @@
 
 .contactList dd {
   color: var(--color-surface-800);
+}
+
+
+@media (max-width: 1023px) {
+  .coverPage {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 3.5rem 1.5rem 2rem;
+  }
+
+  .coverDivider {
+    display: none;
+  }
+
+  .coverGreeting {
+    white-space: normal;
+  }
+
+  .coverInfo,
+  .coverSkills {
+    padding-top: 2rem;
+    border-top: 1px solid var(--cover-line);
+  }
+}
+
+@media (max-width: 640px) {
+  .coverInfoRow,
+  .coverCertRow,
+  .coverProjectRow {
+    grid-template-columns: 1fr;
+    row-gap: 0.2rem;
+  }
+
+  .coverContacts {
+    grid-template-columns: 1fr;
+  }
+
+  .skillVisualCard {
+    grid-template-columns: 3rem 1fr;
+    column-gap: 0.8rem;
+  }
 }
 
 @media (min-width: 768px) {
