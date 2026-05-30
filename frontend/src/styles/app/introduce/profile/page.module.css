@@ -131,7 +131,8 @@
 
 .coverSectionTitle,
 .coverSkillsTitle {
-  margin: 0;
+  width: min(100%, 20rem);
+  margin: 0 auto;
   color: var(--cover-ink);
   font-size: clamp(1.65rem, 2.4vw, 2.1rem);
   line-height: 1;
@@ -149,7 +150,8 @@
 
 .coverInfoList {
   gap: 0.7rem;
-  margin-top: 1.25rem;
+  width: min(100%, 20rem);
+  margin: 1.25rem auto 0;
 }
 
 .coverInfoRow,
@@ -158,6 +160,7 @@
   display: grid;
   grid-template-columns: 8.1rem 1fr;
   column-gap: 0.75rem;
+  width: 100%;
   color: var(--cover-soft-ink);
   font-size: 0.78rem;
   line-height: 1.32;
@@ -181,6 +184,20 @@
 
 .coverInfoRow strong,
 .coverCertRow strong,
+
+.coverProjectLink {
+  display: block;
+  color: inherit;
+  text-decoration: underline transparent;
+  text-underline-offset: 0.18rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.coverProjectLink:hover {
+  color: var(--cover-accent);
+  text-decoration-color: var(--cover-accent);
+}
+
 .coverProjectRow strong {
   display: block;
   margin-bottom: 0.25rem;
@@ -207,7 +224,8 @@
 
 .coverCertList {
   gap: 0.5rem;
-  margin-top: 0.8rem;
+  width: min(100%, 20rem);
+  margin: 0.8rem auto 0;
 }
 
 .coverCertRow {
@@ -225,10 +243,29 @@
 }
 
 .coverProjectList {
+  position: relative;
   gap: 0.38rem;
-  margin-top: 0.875rem;
-  padding-left: 1.125rem;
+  width: min(100%, 20rem);
+  margin: 0.875rem auto 0;
+  padding: 0.55rem 0 0.55rem 1.125rem;
   border-left: 2px solid var(--cover-ink);
+}
+
+.coverProjectList::before,
+.coverProjectList::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 0.75rem;
+  border-top: 2px solid var(--cover-ink);
+}
+
+.coverProjectList::before {
+  top: 0;
+}
+
+.coverProjectList::after {
+  bottom: 0;
 }
 
 .coverProjectRow {
@@ -237,19 +274,35 @@
   line-height: 1.24;
 }
 
+
+.coverProjectLink {
+  display: block;
+  color: inherit;
+  text-decoration: underline transparent;
+  text-underline-offset: 0.18rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.coverProjectLink:hover {
+  color: var(--cover-accent);
+  text-decoration-color: var(--cover-accent);
+}
+
 .coverProjectRow strong {
   font-size: 0.79rem;
   line-height: 1;
 }
 
 .coverSkillsTitle {
-  margin-top: 1.625rem;
+  margin-top: 0;
 }
 
 .skillVisualGrid {
   display: grid;
   gap: 1.05rem;
-  margin-top: 1.75rem;
+  width: min(100%, 22rem);
+  margin: 1.75rem auto 0;
+  transform: translateX(0.8rem);
 }
 
 .skillVisualCard {
@@ -257,6 +310,7 @@
   grid-template-columns: 3.65rem 1fr;
   column-gap: 1.125rem;
   align-items: start;
+  text-align: left;
 }
 
 .skillIcon {
@@ -715,9 +769,8 @@
     grid-template-columns: 1fr;
   }
 
-  .skillVisualCard {
-    grid-template-columns: 3rem 1fr;
-    column-gap: 0.8rem;
+  .skillVisualGrid {
+    transform: none;
   }
 
   .section.portfolioShowcase {

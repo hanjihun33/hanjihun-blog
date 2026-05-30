@@ -29,21 +29,25 @@ const projectSummaryItems = [
   {
     period: '2026.04 - 2026.05',
     title: 'Wedge',
+    slug: 'wedge',
     description: '브라우저 실행 기반\nUX 전환 리스크 진단 서비스',
   },
   {
     period: '2026.02 - 2026.04',
     title: 'DonDone',
+    slug: 'dondone',
     description: '외국인 근로자 블록체인 지갑\n급여·송금·증빙 통합 서비스',
   },
   {
     period: '2026.01 - 2026.02',
     title: '당낭콩',
+    slug: 'dangnangkong',
     description: '실시간 혈당 데이터 기반\nAI 혈당 관리 서비스',
   },
   {
     period: '2025.11 - 2025.12',
     title: 'MyTripQuest',
+    slug: 'mytripquest',
     description: 'GPS·AI 인증 기반\n게이미피케이션 여행 서비스',
   },
 ];
@@ -155,8 +159,14 @@ export default function ProfilePage() {
                 <div className={styles.coverProjectRow} key={item.title}>
                   <dt>{item.period}</dt>
                   <dd>
-                    <strong>{item.title}</strong>
-                    <span>{item.description}</span>
+                    <Link
+                      aria-label={`${item.title} 프로젝트 상세 보기`}
+                      className={styles.coverProjectLink}
+                      to={`/introduce/profile/projects/${item.slug}`}
+                    >
+                      <strong>{item.title}</strong>
+                      <span>{item.description}</span>
+                    </Link>
                   </dd>
                 </div>
               ))}
