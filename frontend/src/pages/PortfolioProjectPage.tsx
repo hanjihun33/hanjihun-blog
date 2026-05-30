@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ProgressBar from '../components/motion/progress-bar';
 import { Chip, Typography } from '../components/tailwind/client-components';
@@ -7,6 +8,10 @@ import styles from '../styles/app/introduce/profile/project.module.css';
 export default function PortfolioProjectPage() {
   const { projectSlug } = useParams();
   const project = findPortfolioProject(projectSlug);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [projectSlug]);
 
   if (!project) {
     return (

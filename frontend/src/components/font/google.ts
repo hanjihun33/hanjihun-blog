@@ -4,6 +4,6 @@ export const logo = {
   },
 };
 
-export const inter = {
-  className: 'font-inter',
+export const systemSans = {
+  className: 'font-system',
 };

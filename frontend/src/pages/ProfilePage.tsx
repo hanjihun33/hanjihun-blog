@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Chip, Typography } from '../components/tailwind/client-components';
+import { Typography } from '../components/tailwind/client-components';
 import ProgressBar from '../components/motion/progress-bar';
 import { portfolioProjects } from '../data/portfolio-projects';
 import styles from '../styles/app/introduce/profile/page.module.css';
@@ -9,7 +9,7 @@ const assetBase = `${import.meta.env.BASE_URL}portfolio-assets`;
 const educationItems = [
   {
     period: '2025.07 - 2026.06',
-    title: '삼성 청년 SW 아카데미',
+    title: '삼성 청년 SW·AI 아카데미',
     description: 'SSAFY 14기, 웹/모바일\n프로젝트 중심 교육',
   },
   {
@@ -78,6 +78,9 @@ const skillItems = [
     note: '캐시와 버퍼를 활용해 외부 API\n수집과 상태 관리를 분리했습니다.',
   },
 ];
+
+const portfolioCardThemes = [styles.themePrimary, styles.themeBlue, styles.themeMint, styles.themeViolet];
+const mobileProjectSlugs = new Set(['dondone', 'dangnangkong', 'mytripquest']);
 
 export default function ProfilePage() {
   return (
@@ -186,63 +189,63 @@ export default function ProfilePage() {
 
         <hr className="my-8 border-slate-100" />
 
-        <div className={styles.section}>
-          <Typography variant="h2">Portfolio.</Typography>
-          <div className={styles.portfolioList}>
-            {portfolioProjects.map((project) => (
-              <div className={styles.portfolioItem} key={project.title}>
-                <div className={styles.timelineRail} aria-hidden="true">
-                  <span className={styles.timelineDot} />
-                  <span className={styles.timelineLine} />
-                </div>
-                <div className={styles.portfolioContent}>
-                  <Typography variant="h4">
-                    <Link
-                      aria-label={`${project.title} 프로젝트 상세 보기`}
-                      className={styles.projectTitleLink}
-                      to={`/introduce/profile/projects/${project.slug}`}
-                    >
-                      {project.title}
-                    </Link>
-                  </Typography>
+        <section className={`${styles.section} ${styles.portfolioShowcase}`} aria-labelledby="portfolio-title">
+          <div className={styles.portfolioHeading}>
+            <Typography id="portfolio-title" variant="h2">
+              My Projects
+            </Typography>
+            <p>프로젝트에서 맡았던 역할과 배운 점을 정리했습니다.</p>
+          </div>
 
-                  <Typography className={styles.label} variant="lead">
-                    Period
-                  </Typography>
-                  <p className={styles.portfolioText}>{project.period}</p>
+          <div className={styles.portfolioGrid}>
+            {portfolioProjects.map((project, index) => {
+              const isMobileProject = mobileProjectSlugs.has(project.slug);
 
-                  <Typography className={styles.label} variant="lead">
-                    Description
-                  </Typography>
-                  <p className={styles.portfolioText}>{project.shortDescription}</p>
+              return (
+                <Link
+                  aria-label={`${project.title} 프로젝트 상세 보기`}
+                  className={`${styles.portfolioCard} ${portfolioCardThemes[index % portfolioCardThemes.length]}`}
+                  key={project.title}
+                  to={`/introduce/profile/projects/${project.slug}`}
+                >
+                  <div className={`${styles.projectPreview} ${isMobileProject ? styles.mobilePreview : styles.webPreview}`}>
+                    {isMobileProject ? (
+                      <div className={styles.phoneMockup}>
+                        <img
+                          alt={`${project.title} 모바일 화면 미리보기`}
+                          className={styles.projectMobileImage}
+                          src={`${assetBase}/projects/${project.slug}.png`}
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.browserMockup}>
+                        <div className={styles.previewTopBar} aria-hidden="true">
+                          <span />
+                          <span />
+                          <span />
+                        </div>
+                        <img
+                          alt={`${project.title} 웹 화면 미리보기`}
+                          className={styles.projectWebImage}
+                          src={`${assetBase}/projects/${project.slug}.png`}
+                        />
+                      </div>
+                    )}
 
-                  <Typography className={styles.label} variant="lead">
-                    What I did
-                  </Typography>
-                  <ul className={styles.projectList}>
-                    {project.whatIDid.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-
-                  <Typography className={styles.label} variant="lead">
-                    Stack
-                  </Typography>
-                  <div className={styles.chipBox}>
-                    {project.stack.map((item) => (
-                      <Chip key={item} size="sm" value={item} variant="outlined" />
-                    ))}
                   </div>
 
-                  <Link className={styles.projectDetailLink} to={`/introduce/profile/projects/${project.slug}`}>
-                    프로젝트 자세히 보기
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
+                  <div className={styles.projectSummary}>
+                    <div>
+                      <h3>{project.title}</h3>
+                      <p>{project.shortDescription}</p>
+                    </div>
+                    <span className={styles.projectArrow}>자세히 보기 →</span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
