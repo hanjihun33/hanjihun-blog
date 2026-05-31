@@ -1,7 +1,12 @@
 export type PortfolioProjectDetail = {
+  teamSize: string;
+  responsibilities: string;
+  demoVideoUrl?: string;
   description: string;
+  implementation: string[];
   roleSummary: string;
-  whatIDid: string[];
-  features: string[];
-  highlights: string[];
+  roleDetails: string[];
+  techSelectionReasons: string[];
+  outcomes: string[];
+  review: string[];
 };

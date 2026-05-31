@@ -5,6 +5,36 @@ import { Chip, Typography } from '../components/tailwind/client-components';
 import { findPortfolioProject, portfolioProjects } from '../data/portfolio-projects';
 import styles from '../styles/app/introduce/profile/project.module.css';
 
+const assetBase = `${import.meta.env.BASE_URL}portfolio-assets`;
+
+function toYouTubeEmbedUrl(url?: string) {
+  if (!url) {
+    return undefined;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+
+    if (parsedUrl.hostname.includes('youtu.be')) {
+      const videoId = parsedUrl.pathname.replace('/', '');
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : undefined;
+    }
+
+    if (parsedUrl.hostname.includes('youtube.com')) {
+      if (parsedUrl.pathname.startsWith('/embed/')) {
+        return url;
+      }
+
+      const videoId = parsedUrl.searchParams.get('v');
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : undefined;
+    }
+  } catch {
+    return undefined;
+  }
+
+  return undefined;
+}
+
 export default function PortfolioProjectPage() {
   const { projectSlug } = useParams();
   const project = findPortfolioProject(projectSlug);
@@ -26,6 +56,7 @@ export default function PortfolioProjectPage() {
   }
 
   const otherProjects = portfolioProjects.filter((item) => item.slug !== project.slug);
+  const demoVideoEmbedUrl = toYouTubeEmbedUrl(project.demoVideoUrl);
 
   return (
     <div className={styles.mainWrapper}>
@@ -34,55 +65,107 @@ export default function PortfolioProjectPage() {
         ← Portfolio로 돌아가기
       </Link>
 
-      <header className={styles.hero}>
-        <p className={styles.period}>{project.period}</p>
-        <Typography className={styles.title} variant="h1">
-          {project.title}
-        </Typography>
-        <p className={styles.lead}>{project.shortDescription}</p>
+      <header className={styles.projectIntro}>
+        <div className={styles.introCopy}>
+          <p className={styles.period}>{project.period}</p>
+          <Typography className={styles.title} variant="h1">
+            {project.title}
+          </Typography>
+          <p className={styles.subtitle}>{project.shortDescription}</p>
+          <p className={styles.introDescription}>{project.description}</p>
+
+          <dl className={styles.introMeta}>
+            <div>
+              <dt>기간</dt>
+              <dd>{project.period}</dd>
+            </div>
+            <div>
+              <dt>인원</dt>
+              <dd>{project.teamSize}</dd>
+            </div>
+            <div>
+              <dt>담당</dt>
+              <dd>{project.responsibilities}</dd>
+            </div>
+            <div>
+              <dt>스택</dt>
+              <dd>{project.stack.slice(0, 6).join(' / ')}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className={styles.introVisual}>
+          <img alt={`${project.title} 프로젝트 대표 화면`} src={`${assetBase}/projects/${project.slug}.png`} />
+        </div>
       </header>
 
-      <section className={styles.section}>
-        <Typography variant="h2">Project Description.</Typography>
-        <p className={styles.paragraph}>{project.description}</p>
-      </section>
+      {demoVideoEmbedUrl ? (
+        <section className={`${styles.section} ${styles.videoSection}`}>
+          <Typography variant="h2">✔️ 시연 영상</Typography>
+          <div className={styles.videoWrapper}>
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              src={demoVideoEmbedUrl}
+              title={`${project.title} 시연 영상`}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className={styles.section}>
-        <Typography variant="h2">My Role.</Typography>
-        <p className={styles.paragraph}>{project.roleSummary}</p>
+        <Typography variant="h2">✔️ 구현 사항</Typography>
         <ul className={styles.list}>
-          {project.whatIDid.map((item) => (
+          {project.implementation.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </section>
 
-      <section className={styles.gridSection}>
-        <article className={styles.card}>
-          <Typography variant="h3">Main Features.</Typography>
-          <ul className={styles.list}>
-            {project.features.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-        <article className={styles.card}>
-          <Typography variant="h3">Highlights.</Typography>
-          <ul className={styles.list}>
-            {project.highlights.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
+      <section className={styles.section}>
+        <Typography variant="h2">✔️ 담당 역할</Typography>
+        <p className={styles.paragraph}>{project.roleSummary}</p>
+        <ul className={styles.list}>
+          {project.roleDetails.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
 
       <section className={styles.section}>
-        <Typography variant="h2">Tech Stack.</Typography>
+        <Typography variant="h2">✔️ 기술 스택</Typography>
         <div className={styles.chipBox}>
           {project.stack.map((item) => (
             <Chip key={item} size="sm" value={item} variant="outlined" />
           ))}
         </div>
+      </section>
+
+      <section className={styles.section}>
+        <Typography variant="h2">✔️ 기술 선정 이유</Typography>
+        <ul className={styles.list}>
+          {project.techSelectionReasons.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <Typography variant="h2">✔️ 프로젝트 성과</Typography>
+        <ul className={styles.list}>
+          {project.outcomes.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <Typography variant="h2">✔️ 프로젝트 리뷰</Typography>
+        <ul className={styles.list}>
+          {project.review.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
 
       <section className={styles.section}>
