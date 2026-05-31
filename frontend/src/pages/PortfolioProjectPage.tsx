@@ -7,6 +7,10 @@ import styles from '../styles/app/introduce/profile/project.module.css';
 
 const assetBase = `${import.meta.env.BASE_URL}portfolio-assets`;
 
+function getImplementationKey(item: (typeof portfolioProjects)[number]['implementation'][number]) {
+  return typeof item === 'string' ? item : item.title;
+}
+
 function toYouTubeEmbedUrl(url?: string) {
   if (!url) {
     return undefined;
@@ -49,7 +53,7 @@ export default function PortfolioProjectPage() {
         <Typography variant="h1">프로젝트를 찾을 수 없습니다.</Typography>
         <p className={styles.lead}>주소가 바뀌었거나 아직 작성되지 않은 프로젝트입니다.</p>
         <Link className={styles.backLink} to="/introduce/profile">
-          Portfolio로 돌아가기
+          프로필로 돌아가기
         </Link>
       </div>
     );
@@ -62,12 +66,11 @@ export default function PortfolioProjectPage() {
     <div className={styles.mainWrapper}>
       <ProgressBar />
       <Link className={styles.backLink} to="/introduce/profile">
-        ← Portfolio로 돌아가기
+        ← 프로필로 돌아가기
       </Link>
 
       <header className={styles.projectIntro}>
         <div className={styles.introCopy}>
-          <p className={styles.period}>{project.period}</p>
           <Typography className={styles.title} variant="h1">
             {project.title}
           </Typography>
@@ -89,7 +92,7 @@ export default function PortfolioProjectPage() {
             </div>
             <div>
               <dt>스택</dt>
-              <dd>{project.stack.slice(0, 6).join(' / ')}</dd>
+              <dd>{project.stack.slice(0, 6).join(', ')}</dd>
             </div>
           </dl>
         </div>
@@ -117,10 +120,149 @@ export default function PortfolioProjectPage() {
         <Typography variant="h2">✔️ 구현 사항</Typography>
         <ul className={styles.list}>
           {project.implementation.map((item) => (
-            <li key={item}>{item}</li>
+            <li className={typeof item === 'string' ? undefined : styles.implementationItem} key={getImplementationKey(item)}>
+              {typeof item === 'string' ? (
+                item
+              ) : (
+                <>
+                  <strong className={styles.implementationTitle}>[{item.title}]</strong>
+                  <ul className={styles.implementationDetailList}>
+                    {item.details.map((detail) => (
+                      <li key={detail}>{detail}</li>
+                    ))}
+                    {item.techStack ? (
+                      <li>
+                        <strong>기술 스택:</strong> {item.techStack}
+                      </li>
+                    ) : null}
+                    {item.usage ? (
+                      <li>
+                        <strong>활용 방법:</strong> {item.usage}
+                      </li>
+                    ) : null}
+                  </ul>
+                </>
+              )}
+            </li>
           ))}
         </ul>
       </section>
+
+      {project.problems?.length ? (
+        <section className={styles.section}>
+          <Typography variant="h2">✔️ 문제 현상</Typography>
+          <div className={styles.problemList}>
+            {project.problems.map((problem) => (
+              <article className={styles.problemCard} key={problem.title}>
+                <Typography className={styles.problemTitle} variant="h3">
+                  {problem.title}
+                </Typography>
+
+                <div className={styles.problemBlock}>
+                  <strong>문제 현상</strong>
+                  <ul className={styles.problemDetailList}>
+                    {problem.symptoms.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={styles.problemBlock}>
+                  <strong>원인</strong>
+                  <ul className={styles.problemDetailList}>
+                    {problem.causes.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={styles.problemBlock}>
+                  <strong>추가 확인 사항</strong>
+                  <ul className={styles.problemDetailList}>
+                    {problem.checks.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {project.improvementFlow ? (
+        <section className={styles.section}>
+          <Typography variant="h2">✔️ 개선 과정</Typography>
+          <div className={styles.flowGrid}>
+            <article className={styles.flowCard}>
+              <Typography className={styles.flowTitle} variant="h3">
+                기존 구조
+              </Typography>
+              <ol className={styles.flowList}>
+                {project.improvementFlow.before.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ol>
+            </article>
+            <article className={styles.flowCard}>
+              <Typography className={styles.flowTitle} variant="h3">
+                개선 구조
+              </Typography>
+              <ol className={styles.flowList}>
+                {project.improvementFlow.after.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ol>
+            </article>
+          </div>
+        </section>
+      ) : null}
+
+      {project.beforeAfter?.length ? (
+        <section className={styles.section}>
+          <Typography variant="h2">✔️ Before & After</Typography>
+          <div className={styles.comparisonTableWrapper}>
+            <table className={styles.comparisonTable}>
+              <thead>
+                <tr>
+                  <th>구분</th>
+                  <th>Before</th>
+                  <th>After</th>
+                </tr>
+              </thead>
+              <tbody>
+                {project.beforeAfter.map((item) => (
+                  <tr key={item.label}>
+                    <th scope="row">{item.label}</th>
+                    <td>{item.before}</td>
+                    <td>{item.after}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      {project.solutionProcess?.length ? (
+        <section className={styles.section}>
+          <Typography variant="h2">✔️ 해결 과정</Typography>
+          <div className={styles.solutionList}>
+            {project.solutionProcess.map((step, index) => (
+              <article className={styles.solutionCard} key={step.title}>
+                <Typography className={styles.solutionTitle} variant="h3">
+                  {index + 1}) {step.title}
+                </Typography>
+                <ul className={styles.problemDetailList}>
+                  {step.details.map((detail) => (
+                    <li key={detail}>{detail}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className={styles.section}>
         <Typography variant="h2">✔️ 담당 역할</Typography>

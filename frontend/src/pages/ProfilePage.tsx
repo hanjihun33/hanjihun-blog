@@ -30,7 +30,7 @@ const projectSummaryItems = [
     period: '2026.04 - 2026.05',
     title: 'Wedge',
     slug: 'wedge',
-    description: '브라우저 실행 기반\nUX 전환 리스크 진단 서비스',
+    description: 'AI 에이전트 기반\n웹사이트 UX 진단 서비스',
   },
   {
     period: '2026.02 - 2026.04',

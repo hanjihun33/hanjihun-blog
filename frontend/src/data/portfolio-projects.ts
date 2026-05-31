@@ -16,8 +16,8 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'wedge',
     title: 'Wedge',
-    period: '2026.04 - 2026.05',
-    shortDescription: 'AI 에이전트 기반 웹사이트 전환 UX 진단 서비스',
+    period: '2026.04 ~ 2026.05',
+    shortDescription: '실제 사용자처럼 사이트를 탐색하는 AI UX 진단 서비스',
     stack: [
       'Spring Boot',
       'React',
