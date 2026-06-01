@@ -37,7 +37,7 @@ export const portfolioProjects: PortfolioProject[] = [
     slug: 'dondone',
     title: 'DonDone',
     period: '2026.02 - 2026.04',
-    shortDescription: '외국인 근로자를 위한 블록체인 기반\n급여 보호·송금·증빙 통합 서비스.',
+    shortDescription: '외국인 근로자를 위한 블록체인 기반\n급여 보호·송금·증빙 통합 서비스',
     stack: [
       'Spring Boot',
       'PostgreSQL',

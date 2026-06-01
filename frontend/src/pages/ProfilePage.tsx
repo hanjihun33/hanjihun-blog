@@ -91,7 +91,13 @@ export default function ProfilePage() {
     <div className={styles.mainWrapper}>
       <ProgressBar />
       <div className={`${styles.subWrapper} ${styles.indexing}`}>
-        <section className={styles.coverPage} aria-label="포트폴리오 소개 및 요약 페이지">
+        <div className={styles.profileHeading}>
+          <Typography id="profile-title" variant="h2">
+            About Me
+          </Typography>
+        </div>
+
+        <section className={styles.coverPage} aria-labelledby="profile-title">
           <div className={styles.topBar} aria-hidden="true" />
 
           <section className={styles.coverIntro} aria-label="자기소개와 연락처">
@@ -207,14 +213,16 @@ export default function ProfilePage() {
             <p>프로젝트에서 맡았던 역할과 배운 점을 정리했습니다.</p>
           </div>
 
-          <div className={styles.portfolioGrid}>
+          <div className={styles.portfolioList}>
             {portfolioProjects.map((project, index) => {
               const isMobileProject = mobileProjectSlugs.has(project.slug);
 
               return (
                 <Link
                   aria-label={`${project.title} 프로젝트 상세 보기`}
-                  className={`${styles.portfolioCard} ${portfolioCardThemes[index % portfolioCardThemes.length]}`}
+                  className={`${styles.portfolioProjectRow} ${index % 2 === 1 ? styles.rowReverse : ''} ${
+                    portfolioCardThemes[index % portfolioCardThemes.length]
+                  }`}
                   key={project.title}
                   to={`/introduce/profile/projects/${project.slug}`}
                 >
@@ -241,13 +249,16 @@ export default function ProfilePage() {
                         />
                       </div>
                     )}
-
                   </div>
 
                   <div className={styles.projectSummary}>
                     <div>
+                      <span className={styles.projectMeta}>
+                        {project.period} · {project.teamSize}
+                      </span>
                       <h3>{project.title}</h3>
                       <p>{project.shortDescription}</p>
+                      <p className={styles.projectRole}>{project.responsibilities}</p>
                     </div>
                     <span className={styles.projectArrow}>자세히 보기 →</span>
                   </div>
